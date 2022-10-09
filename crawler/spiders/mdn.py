@@ -27,11 +27,16 @@ class MDNSpider(scrapy.Spider):
         name = clean_html(name)
         name = unescape(name)
         version = jsonresponse['data']['__compat']['support']['firefox'][-1]['version_added']
+        if version:
+            release_date = jsonresponse['data']['__compat']['support']['firefox'][-1]['release_date']
+        else:
+            release_date = None
         link = 'https://developer.mozilla.org' + jsonresponse['data']['__compat']['mdn_url']
 
         item['name'] = name
         item['render'] = 'firefox'
         item['version'] = version
+        item['release_date'] = release_date
         item['link'] = link
 
         yield item
