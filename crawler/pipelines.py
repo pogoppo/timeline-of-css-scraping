@@ -22,6 +22,12 @@ class CrawlerPipeline:
         css.version = item['version']
         css.link = item['link']
 
+        css_duplicated = self.session.query(CSSProperties).\
+            filter(CSSProperties.name == item['name']).\
+            count() > 0
+        if css_duplicated:
+            return item
+
         self.session.add(instance=css)
         self.session.commit()
 
