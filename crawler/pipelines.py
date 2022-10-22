@@ -11,7 +11,7 @@ from models.release_dates import ReleaseDates
 class CrawlerPipeline:
     def __init__(self):
         dist_path = os.path.join(ROOT_DIR, 'dist')
-        db_path = os.path.join(dist_path, 'css_milestone.sqlite')
+        db_path = os.path.join(dist_path, 'css_prop_versions.sqlite')
         engine = sqlalchemy.create_engine('sqlite:///' + db_path, echo=True)
         self.session = sessionmaker(bind=engine)()
 
